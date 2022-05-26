@@ -44,7 +44,7 @@ final class AVVideoIOUnit: NSObject, AVIOUnit {
     }()
     weak var mixer: AVMixer?
 
-    private(set) var effects: Set<VideoEffect> = []
+    private(set) var effects: [VideoEffect] = []
 
     private var extent = CGRect.zero {
         didSet {
@@ -375,12 +375,20 @@ final class AVVideoIOUnit: NSObject, AVIOUnit {
 
     func registerEffect(_ effect: VideoEffect) -> Bool {
         effect.ciContext = context
-        return effects.insert(effect).inserted
+//        return effects.insert(effect).inserted
+        effects.append(effect)
+        return true
     }
 
     func unregisterEffect(_ effect: VideoEffect) -> Bool {
         effect.ciContext = nil
-        return effects.remove(effect) != nil
+//        return effects.remove(effect) != nil
+        for (index, item) in effects.enumerated() {
+            if item == effect {
+                effects.remove(at: index)
+            }
+        }
+        return true
     }
 }
 
