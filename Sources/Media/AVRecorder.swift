@@ -169,7 +169,7 @@ open class DefaultAVRecorderDelegate: NSObject {
     public static let shared = DefaultAVRecorderDelegate()
 
     open var duration: Int64 = 0
-    open var dateFormat: String = "-yyyyMMdd-HHmmss"
+    open var dateFormat: String = "yyyyMMdd-HHmmss"
 
     private var rotateTime = CMTime.zero
     private var clockReference: AVMediaType = .video
